@@ -1,0 +1,47 @@
+<form>
+  <div class="row">
+    <div class="col">
+      <a class="btn btn-primary" routerLink="/contact/add">Add Contact</a>
+    </div>
+  </div>
+  <div *ngIf="!showLoading && contact.length > 0" class="row">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of contact">
+          <td>{{item.id}}</td>
+          <td>{{item.firstName}}</td>
+          <td>{{item.lastName}}</td>
+          <td>{{item.email}}</td>
+          <td>
+            <a class="btn btn-primary" routerLink="/contact/edit/{{item.id}}">Edit</a>
+          </td>
+          <td>
+            <a class="btn btn-danger" (click)="deleteContact(item.id)" >Delete</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="showLoading" class="row">
+    <app-loader></app-loader>
+  </div>
+  <div *ngIf="!showLoading && errorMessage">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <p class="h4 text-danger fw-bold">{{errorMessage}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

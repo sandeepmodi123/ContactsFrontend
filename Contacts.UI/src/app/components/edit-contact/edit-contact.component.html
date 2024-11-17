@@ -1,0 +1,30 @@
+<div class="col-12">
+  <form *ngIf="!showLoading" (submit)="updateContact()">
+    <div class="form-group">
+      <label for="firstName">First name:</label>
+      <input type="text" [(ngModel)]="contact.firstName" name="firstName" class="form-control" required="true">
+    </div>
+    <div class="form-group">
+      <label for="lastname">Last name:</label>
+      <input type="text" [(ngModel)]="contact.lastName" class="form-control" name="lastName" required="true">
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" [(ngModel)]="contact.email" class="form-control" name="email" required="true">
+    </div>
+    <button type="submit" class="btn btn-primary">Save Contact</button>
+    <a class="btn btn-primary" routerLink="/contact/manage" style="float:right;">Back</a>
+  </form>
+  <div *ngIf="showLoading" class="row">
+    <app-loader></app-loader>
+  </div>
+  <div *ngIf="!showLoading && errorMessage">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <p class="h4 text-danger fw-bold">{{errorMessage}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
