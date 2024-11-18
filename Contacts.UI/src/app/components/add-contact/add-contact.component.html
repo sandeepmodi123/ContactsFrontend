@@ -1,18 +1,27 @@
 <div class="col-12">
-  <form (submit)="createContact()">
+  <form (submit)="createContact()" [formGroup]="contactAddForm">
     <div class="form-group">
-      <label for="firstName">First name:</label>
-      <input type="text" [(ngModel)]="contact.firstName" name="firstName" class="form-control" required="true">
+      <label for="firstName">First name:</label><span class="text-danger"> *</span>
+      <input type="text" [(ngModel)]="contact.firstName" [formControl]="firstName" name="firstName" class="form-control" required="true">
+      <div *ngIf="hasError('firstName', 'required')">
+        Firstname is required.
+      </div>
     </div>
     <div class="form-group">
-      <label for="lastname">Last name:</label>
-      <input type="text" [(ngModel)]="contact.lastName" class="form-control" name="lastName" required="true">
+      <label for="lastname">Last name:</label><span class="text-danger"> *</span>
+      <input type="text" [(ngModel)]="contact.lastName" [formControl]="lastName" class="form-control" name="lastName" required="true">
+      <div *ngIf="hasError('lastName', 'required')">
+        Lastname is required.
+      </div>
     </div>
-     <div class="form-group">
-     <label for="email">Email:</label>
-     <input type="email" [(ngModel)]="contact.email" class="form-control" name="email"  required="true">
-   </div>
-    <button type="submit" class="btn btn-primary">Save Contact</button>
+    <div class="form-group">
+      <label for="email">Email:</label><span class="text-danger"> *</span>
+      <input type="email" [(ngModel)]="contact.email" [formControl]="email"  class="form-control" name="email" required="true">
+      <div *ngIf="hasError('email', 'required')">
+        Email is required.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!contactAddForm.valid">Save Contact</button>
     <a class="btn btn-primary" routerLink="/contact/manage" style="float:right;">Back</a>
   </form>
   <div *ngIf="showLoading" class="row">
