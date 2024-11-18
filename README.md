@@ -10,6 +10,7 @@ This is a Contact Management Application built with Angular. The application all
 - [Running the Application](#running-the-application)
 - [Features](#features)
 - [Built With](#built-with)
+- [Run Application](#run-application)
 
 ## Getting Started
 These instructions will help you set up the project on your local machine for development and testing purposes.
@@ -48,3 +49,10 @@ Angular
 
 Bootstrap
 
+## Run Application
+
+To run this application, the following points should be followed.
+1. Run the backend application first
+2. Make sure the endpoint of the backend application is correctly configured in this application at the contact.service.ts file
+3. Install node modules
+4. Start application npm start
