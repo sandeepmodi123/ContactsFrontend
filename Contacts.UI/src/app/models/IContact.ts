@@ -4,3 +4,9 @@ export interface IContact {
   lastName: string,
   email: string
 }
+
+export interface IContactSearch {
+  searchItem: string,
+  isSortAscending: boolean,
+  sortBy: string
+}
