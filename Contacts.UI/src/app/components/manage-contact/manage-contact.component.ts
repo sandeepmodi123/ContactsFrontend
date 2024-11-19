@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactService } from '../../services/contact.service';
-import { IContact } from '../../models/IContact';
+import { IContact, IContactSearch } from '../../models/IContact';
 
 @Component({
   selector: 'app-manage-contact',
@@ -13,7 +13,8 @@ export class ManageContactComponent implements OnInit {
   public errorMessage: string = '';
   public showLoading: boolean = true;
   public showConfirm: boolean = false;
-
+  public searchText: string = '';
+  public searchInput: IContactSearch = {} as IContactSearch; 
   constructor(private contactService: ContactService) { }
   ngOnInit(): void {
     this.contactService.getAllContacts().subscribe((data: IContact[]) => {
@@ -41,5 +42,22 @@ export class ManageContactComponent implements OnInit {
         this.showLoading = false;
       });
     }
+  }
+
+  public valuechange() {
+    this.searchInput.searchItem = this.searchText;
+    this.searchInput.isSortAscending = true;
+    this.searchInput.sortBy = 'FirstName';
+    this.searchContact(this.searchInput);
+  }
+
+  public searchContact(searchInput: IContactSearch) {
+    this.contactService.searchContacts(searchInput).subscribe((data: IContact[]) => {
+      this.contact = data;
+      this.showLoading = false;
+    }, (error) => {
+      this.errorMessage = error;
+      this.showLoading = false;
+    });
   }
 }

@@ -4,6 +4,12 @@
       <a class="btn btn-primary" routerLink="/contact/add">Add Contact</a>
     </div>
   </div>
+  <div class="row">
+    <div class="col-3">
+      <input type="text" class="form-control" style="width:250px; margin-top:20px; margin-bottom:20px;" name="search" [(ngModel)]="searchText" (change)="valuechange()" autocomplete="off" placeholder="Search...">
+    </div>
+  </div>
+  
   <div *ngIf="!showLoading && contact.length > 0" class="row">
     <table class="table table-striped">
       <thead>
@@ -26,7 +32,7 @@
             <a class="btn btn-primary" routerLink="/contact/edit/{{item.id}}">Edit</a>
           </td>
           <td>
-            <a class="btn btn-danger" (click)="deleteContact(item.id)" >Delete</a>
+            <a class="btn btn-danger" (click)="deleteContact(item.id)">Delete</a>
           </td>
         </tr>
       </tbody>

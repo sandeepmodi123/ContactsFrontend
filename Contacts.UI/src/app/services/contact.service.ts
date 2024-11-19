@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
-import { IContact } from '../models/IContact';
+import { IContact, IContactSearch } from '../models/IContact';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,11 @@ export class ContactService {
   public getContact(id: string | null): Observable<IContact> {
     let dataURL: string = `${this.serverURL}/Contact/${id}`;
     return this.httpClient.get<IContact>(dataURL).pipe(catchError(this.handleError));
+  }
+
+  public searchContacts(contactSearch: IContactSearch): Observable<IContact[]> {
+    let dataURL: string = `${this.serverURL}/Contact/Search`;
+    return this.httpClient.post<IContact[]>(dataURL, contactSearch).pipe(catchError(this.handleError));
   }
 
   public updateContact(contact: IContact): Observable<{}> {
